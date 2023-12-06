@@ -12,6 +12,7 @@ public class Money {
     private void validate(int amount) {
         validateMinimumAmount(amount);
         validateAmountUnit(amount);
+        validateMaximumAmount(amount);
     }
 
     private void validateMinimumAmount(int amount) {
@@ -23,6 +24,12 @@ public class Money {
     private void validateAmountUnit(int amount) {
         if (amount % 1000 != 0) {
             throw new IllegalArgumentException("[ERROR] 금액은 1000원 단위여야 합니다.");
+        }
+    }
+
+    private void validateMaximumAmount(int amount) {
+        if (amount > 100000) {
+            throw new IllegalArgumentException("[ERROR] 1인당 10만원을 초과할 수 없습니다.");
         }
     }
 
