@@ -17,6 +17,10 @@ public class Lotto {
                 .count();
     }
 
+    public boolean hasBonusNumber(int bonusNumber) {
+        return numbers.contains(bonusNumber);
+    }
+
     private void validate(List<Integer> numbers) {
         validateNumberSize(numbers);
         validateNumberInRange(numbers);
