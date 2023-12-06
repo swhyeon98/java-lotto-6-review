@@ -13,8 +13,8 @@ public class LottoMachine {
         this.lottoGenerator = lottoGenerator;
     }
 
-    public List<Lotto> buyLottos(int purchaseAmount) {
-        int lottoCount = purchaseAmount / 1000;
+    public List<Lotto> buyLottos(Money purchaseAmount) {
+        int lottoCount = purchaseAmount.getAmount() / 1000;
         return IntStream.range(0, lottoCount)
                 .mapToObj(i -> createSortedLotto())
                 .collect(Collectors.toList());
