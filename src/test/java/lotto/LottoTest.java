@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTest {
@@ -37,5 +38,44 @@ class LottoTest {
         assertThatThrownBy(() -> new Lotto(numbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
+    }
+
+    @Test
+    void 당첨_번호와_구매_번호가_모두_일치할_경우_일치하는_숫자의_개수가_정확히_계산된다() throws Exception {
+        // given
+        Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto purchasedLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+
+        // when
+        int winningCount = winningLotto.getMatchCount(purchasedLotto);
+
+        // then
+        assertThat(winningCount).isEqualTo(6);
+    }
+
+    @Test
+    void 당첨_번호와_구매_번호가_5개만_일치할_경우_일치하는_숫자의_개수가_정확히_계산된다() throws Exception {
+        // given
+        Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto purchasedLotto = new Lotto(List.of(1, 2, 3, 4, 5, 7));
+
+        // when
+        int winningCount = winningLotto.getMatchCount(purchasedLotto);
+
+        // then
+        assertThat(winningCount).isEqualTo(5);
+    }
+
+    @Test
+    void 당첨_번호와_구매_번호가_모두_일치하지_않을_경우_일치하는_숫자의_개수가_정확히_계산된다() throws Exception {
+        // given
+        Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto purchasedLotto = new Lotto(List.of(7, 8, 9, 10, 11, 12));
+
+        // when
+        int winningCount = winningLotto.getMatchCount(purchasedLotto);
+
+        // then
+        assertThat(winningCount).isEqualTo(0);
     }
 }
