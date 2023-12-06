@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.model.Lotto;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,6 +14,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTest {
+
+    private Lotto winningLotto;
+
+    @BeforeEach
+    void setUp() {
+        winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+    }
+
     @DisplayName("로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.")
     @Test
     void createLottoByOverSize() {
@@ -43,7 +52,6 @@ class LottoTest {
     @Test
     void 당첨_번호와_구매_번호가_모두_일치할_경우_일치하는_숫자의_개수가_정확히_계산된다() throws Exception {
         // given
-        Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         Lotto purchasedLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
 
         // when
@@ -56,7 +64,6 @@ class LottoTest {
     @Test
     void 당첨_번호와_구매_번호가_5개만_일치할_경우_일치하는_숫자의_개수가_정확히_계산된다() throws Exception {
         // given
-        Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         Lotto purchasedLotto = new Lotto(List.of(1, 2, 3, 4, 5, 7));
 
         // when
@@ -69,7 +76,6 @@ class LottoTest {
     @Test
     void 당첨_번호와_구매_번호가_모두_일치하지_않을_경우_일치하는_숫자의_개수가_정확히_계산된다() throws Exception {
         // given
-        Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         Lotto purchasedLotto = new Lotto(List.of(7, 8, 9, 10, 11, 12));
 
         // when
@@ -77,5 +83,29 @@ class LottoTest {
 
         // then
         assertThat(winningCount).isEqualTo(0);
+    }
+
+    @Test
+    void 보너스_번호가_일치할_경우_결과값은_true() throws Exception {
+        // given
+        int bonusNumber = 1;
+
+        // when
+        boolean hasBonusNumber = winningLotto.hasBonusNumber(bonusNumber);
+
+        // then
+        assertThat(hasBonusNumber).isTrue();
+    }
+
+    @Test
+    void 보너스_번호가_일치하지_않을_경우_결과값은_false() throws Exception {
+        // given
+        int bonusNumber = 7;
+
+        // when
+        boolean hasBonusNumber = winningLotto.hasBonusNumber(bonusNumber);
+
+        // then
+        assertThat(hasBonusNumber).isFalse();
     }
 }
