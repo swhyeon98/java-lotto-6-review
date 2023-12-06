@@ -51,4 +51,9 @@ public class Lotto {
             throw new IllegalArgumentException("[ERROR] 중복된 숫자가 존재합니다. 1부터 45 사이의 서로 다른 숫자 6개를 입력해주세요.");
         }
     }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
+    }
 }
