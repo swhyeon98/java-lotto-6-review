@@ -48,6 +48,17 @@ class LottoTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
     }
+    
+    @Test
+    void 보너스_번호_중복_검증() throws Exception {
+        // given
+        int bonusNumber = 1;
+
+        // when & then
+        assertThatThrownBy(() -> winningLotto.validateBonusNumber(bonusNumber))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("[ERROR] 보너스 번호가 당첨 번호 리스트에 포함되어 있습니다.");
+    }
 
     @Test
     void 당첨_번호와_구매_번호가_모두_일치할_경우_일치하는_숫자의_개수가_정확히_계산된다() throws Exception {
