@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,7 +22,7 @@ public class LottoMachine {
     }
 
     private Lotto createSortedLotto() {
-        List<Integer> numbers = lottoGenerator.generate();
+        List<Integer> numbers = new ArrayList<>(lottoGenerator.generate());
         Collections.sort(numbers);
         return new Lotto(numbers);
     }
