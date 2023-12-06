@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static lotto.global.LottoConstants.LOTTO_PRICE;
+
 public class LottoResult {
 
     public Map<Rank, Long> calculateResults(Lotto winningLotto, List<Lotto> purchasedLottos, int bonusNumber) {
@@ -24,7 +26,7 @@ public class LottoResult {
     }
 
     public double calculateProfit(List<Lotto> purchasedLottos, Map<Rank, Long> results) {
-        long purchaseAmount = purchasedLottos.size() * 1000;
+        long purchaseAmount = purchasedLottos.size() * LOTTO_PRICE;
         long totalPrize = calculateTotalPrize(results);
         return ((double) totalPrize / purchaseAmount) * 100;
     }

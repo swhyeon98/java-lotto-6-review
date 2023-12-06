@@ -2,6 +2,10 @@ package lotto.model;
 
 import java.util.List;
 
+import static lotto.global.LottoConstants.LOTTO_NUMBER_SIZE;
+import static lotto.global.LottoConstants.MAX_LOTTO_NUMBER;
+import static lotto.global.LottoConstants.MIN_LOTTO_NUMBER;
+
 public class Lotto {
     private final List<Integer> numbers;
 
@@ -34,13 +38,13 @@ public class Lotto {
     }
 
     private void validateNumberSize(List<Integer> numbers) {
-        if (numbers.size() != 6) {
+        if (numbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("[ERROR] 입력한 숫자의 개수가 올바르지 않습니다. 6개의 숫자를 입력해야 합니다.");
         }
     }
 
     private void validateNumberInRange(List<Integer> numbers) {
-        if (numbers.stream().anyMatch(number -> number < 1 || number > 45)) {
+        if (numbers.stream().anyMatch(number -> number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER)) {
             throw new IllegalArgumentException("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
         }
     }

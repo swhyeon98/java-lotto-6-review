@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static lotto.global.LottoConstants.LOTTO_PRICE;
+
 public class LottoMachine {
 
     private final RandomNumberGenerator lottoGenerator;
@@ -15,7 +17,7 @@ public class LottoMachine {
     }
 
     public List<Lotto> buyLottos(Money purchaseAmount) {
-        int lottoCount = purchaseAmount.getAmount() / 1000;
+        int lottoCount = purchaseAmount.getAmount() / LOTTO_PRICE;
         return IntStream.range(0, lottoCount)
                 .mapToObj(i -> createSortedLotto())
                 .collect(Collectors.toList());
