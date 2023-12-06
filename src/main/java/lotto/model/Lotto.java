@@ -13,6 +13,7 @@ public class Lotto {
     private void validate(List<Integer> numbers) {
         validateNumberSize(numbers);
         validateNumberInRange(numbers);
+        validateDuplicate(numbers);
     }
 
     private void validateNumberSize(List<Integer> numbers) {
@@ -24,6 +25,13 @@ public class Lotto {
     private void validateNumberInRange(List<Integer> numbers) {
         if (numbers.stream().anyMatch(number -> number < 1 || number > 45)) {
             throw new IllegalArgumentException("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
+        }
+    }
+
+    private void validateDuplicate(List<Integer> numbers) {
+        long uniqueCount = numbers.stream().distinct().count();
+        if (uniqueCount != numbers.size()) {
+            throw new IllegalArgumentException("[ERROR] 중복된 숫자가 존재합니다. 1부터 45 사이의 서로 다른 숫자 6개를 입력해주세요.");
         }
     }
 }
