@@ -10,6 +10,13 @@ public class Lotto {
         this.numbers = numbers;
     }
 
+    public int getMatchCount(Lotto purchasedLotto) {
+        List<Integer> winningLotto = numbers;
+        return (int) purchasedLotto.numbers.stream()
+                .filter(winningLotto::contains)
+                .count();
+    }
+
     private void validate(List<Integer> numbers) {
         validateNumberSize(numbers);
         validateNumberInRange(numbers);
