@@ -10,6 +10,12 @@ public class Lotto {
         this.numbers = numbers;
     }
 
+    public void validateBonusNumber(int bonusNumber) {
+        if (numbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("[ERROR] 보너스 번호가 당첨 번호 리스트에 포함되어 있습니다.");
+        }
+    }
+
     public int getMatchCount(Lotto purchasedLotto) {
         List<Integer> winningLotto = numbers;
         return (int) purchasedLotto.numbers.stream()
