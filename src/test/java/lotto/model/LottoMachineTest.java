@@ -18,7 +18,7 @@ class LottoMachineTest {
     @Test
     void 로또는_구매금액만큼_발행되어야_한다() throws Exception {
         // given
-        int purchaseAmount = 3000;
+        Money purchaseAmount = new Money(3000);
         LottoMachine lottoMachine = new LottoMachine(lottoGenerator);
 
         // when
